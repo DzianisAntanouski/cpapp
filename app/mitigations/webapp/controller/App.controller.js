@@ -3,7 +3,7 @@ sap.ui.define([
 ], function (BaseController) {
     "use strict";
 
-    return BaseController.extend("ns.mitigations.controller.App", {
+    return BaseController.extend("ns.migrations.controller.App", {
 
         onInit : function () {
             // apply content density mode to root view

@@ -3,7 +3,7 @@ sap.ui.define([
 ], function (BaseController) {
     "use strict";
 
-    return BaseController.extend("ns.mitigations.controller.NotFound", {
+    return BaseController.extend("ns.migrations.controller.NotFound", {
 
         /**
          * Navigates to the worklist when the link is pressed

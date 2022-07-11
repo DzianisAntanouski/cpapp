@@ -17,6 +17,13 @@
                         "roles": [
                             "RiskManager"
                         ]
+                    },
+                    "admin@tester.com": {
+                        "password": "4",
+                        "ID": "admin@tester.com",
+                        "roles": [
+                            "RiskManager"
+                        ]
                     }
                 }
             }

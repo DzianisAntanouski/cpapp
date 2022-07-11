@@ -1,52 +1,30 @@
-<mvc:View
-    controllerName="ns.mitigations.controller.Worklist"
+<mvc:View controllerName="ns.migrations.controller.Worklist"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:semantic="sap.f.semantic">
 
-    <semantic:SemanticPage
-        id="page"
-        headerPinnable="false"
-        toggleHeaderOnTitleClick="false">
+    <semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
 
         <semantic:titleHeading>
-            <Title id="_IDGenTitle1"
-                text="{i18n>worklistTitle}"
-                level="H2"/>
+            <Title text="{i18n>worklistTitle}" level="H2"/>
         </semantic:titleHeading>
 
         <semantic:content>
-            <Table
-                id="table"
-                width="auto"
-                items="{
+            <Table id="table" width="auto" items="{
                     path: '/Mitigations',
                     sorter: {
                         path: 'ID',
                         descending: false
                     }
-                }"
-                noDataText="{worklistView>/tableNoDataText}"
-                busyIndicatorDelay="{worklistView>/tableBusyDelay}"
-                growing="true"
-                growingScrollToLoad="true"
-                updateFinished=".onUpdateFinished">
+                }" noDataText="{worklistView>/tableNoDataText}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished">
 
                 <headerToolbar>
-                    <OverflowToolbar id="_IDGenOverflowToolbar1">
-                        <Title
-                            id="tableHeader"
-                            text="{worklistView>/worklistTableTitle}"
-                            level="H3"/>
-                        <ToolbarSpacer id="_IDGenToolbarSpacer1" />
-                        <SearchField
-                            id="searchField"
-                            tooltip="{i18n>worklistSearchTooltip}"
-                            search=".onSearch">
+                    <OverflowToolbar>
+                        <Title id="tableHeader" text="{worklistView>/worklistTableTitle}" level="H3"/>
+                        <ToolbarSpacer />
+                        <SearchField id="searchField" tooltip="{i18n>worklistSearchTooltip}" search=".onSearch">
                             <layoutData>
-                                <OverflowToolbarLayoutData id="_IDGenOverflowToolbarLayoutData1"
-                                    maxWidth="200px"
-                                    priority="NeverOverflow"/>
+                                <OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow"/>
                             </layoutData>
                         </SearchField>
                     </OverflowToolbar>
@@ -63,18 +41,13 @@
                         <Text text="Timeline" id="TimelineColumnTitle"/>
                     </Column>
                 </columns>
-            
+
                 <items>
-                    <ColumnListItem id="_IDGenColumnListItem1"
-                        type="Navigation"
-                        press=".onPress">
+                    <ColumnListItem type="Navigation" press=".onPress">
                         <cells>
-                            <ObjectIdentifier id="_IDGenObjectIdentifier1"
-                                text="{description}" />
-                            <Text id="_IDGenText1"
-                                text="{owner}" />
-                            <Text id="_IDGenText2"
-                                text="{timeline}" />
+                            <ObjectIdentifier text="{description}" />
+                            <Text text="{owner}" />
+                            <Text text="{timeline}" />
                         </cells>
                     </ColumnListItem>
                 </items>

@@ -7,7 +7,7 @@ sap.ui.define([
 ], function (BaseController, JSONModel, formatter, Filter, FilterOperator) {
     "use strict";
 
-    return BaseController.extend("ns.mitigations.controller.Worklist", {
+    return BaseController.extend("ns.migrations.controller.Worklist", {
 
         formatter: formatter,
 

@@ -1,8 +1,8 @@
 <mvc:View
-    controllerName="ns.mitigations.controller.Object"
+    controllerName="ns.migrations.controller.Object"
     xmlns="sap.m"
-    xmlns:l="sap.ui.layout"
     xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
     xmlns:semantic="sap.f.semantic">
 
     <semantic:SemanticPage
@@ -13,11 +13,17 @@
         busyIndicatorDelay="{objectView>/delay}">
 
         <semantic:titleHeading>
-            <Title id="_IDGenTitle1" text="{description}" />
+            <Title
+                text="{ID}"
+                level="H2"/>
+        </semantic:titleHeading>
+
+        <semantic:titleHeading>
+            <Title text="{description}" />
         </semantic:titleHeading>
 
         <semantic:headerContent>
-            <ObjectNumber id="_IDGenObjectNumber1"
+            <ObjectNumber
             />
         </semantic:headerContent>
 
@@ -26,13 +32,12 @@
         </semantic:sendEmailAction>
 
         <semantic:content>
-            <l:VerticalLayout id="_IDGenVerticalLayout1">
-                <ObjectStatus id="_IDGenObjectStatus1" title="Description" text="{description}"/>
-                <ObjectStatus id="_IDGenObjectStatus2" title="Owner" text="{owner}"/>
-                <ObjectStatus id="_IDGenObjectStatus3" title="Timeline" text="{timeline}"/>
+            <l:VerticalLayout>
+                <ObjectStatus title="Description" text="{description}"/>
+                <ObjectStatus title="Owner" text="{owner}"/>
+                <ObjectStatus title="Timeline" text="{timeline}"/>
             </l:VerticalLayout>
         </semantic:content>
-
 
     </semantic:SemanticPage>
 

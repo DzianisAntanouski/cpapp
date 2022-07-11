@@ -8,7 +8,7 @@ sap.ui.define([
     // shortcut for sap.m.URLHelper
     var URLHelper = mobileLibrary.URLHelper;
 
-    return Controller.extend("ns.mitigations.controller.BaseController", {
+    return Controller.extend("ns.migrations.controller.BaseController", {
         /**
          * Convenience method for accessing the router.
          * @public

@@ -14,16 +14,11 @@
             <EntityContainer Name="EntityContainer">
                 <EntitySet Name="Risks" EntityType="RiskService.Risks">
                     <NavigationPropertyBinding Path="miti" Target="Mitigations"/>
-                    <NavigationPropertyBinding Path="per" Target="Persons"/>
                     <NavigationPropertyBinding Path="SiblingEntity" Target="Risks"/>
                 </EntitySet>
                 <EntitySet Name="Mitigations" EntityType="RiskService.Mitigations">
                     <NavigationPropertyBinding Path="risks" Target="Risks"/>
                     <NavigationPropertyBinding Path="SiblingEntity" Target="Mitigations"/>
-                </EntitySet>
-                <EntitySet Name="Persons" EntityType="RiskService.Persons">
-                    <NavigationPropertyBinding Path="risks" Target="Risks"/>
-                    <NavigationPropertyBinding Path="SiblingEntity" Target="Persons"/>
                 </EntitySet>
             </EntityContainer>
             <EntityType Name="Risks">
@@ -43,10 +38,6 @@
                     <ReferentialConstraint Property="miti_ID" ReferencedProperty="ID"/>
                 </NavigationProperty>
                 <Property Name="miti_ID" Type="Edm.Guid"/>
-                <NavigationProperty Name="per" Type="RiskService.Persons" Partner="risks">
-                    <ReferentialConstraint Property="per_ID" ReferencedProperty="ID"/>
-                </NavigationProperty>
-                <Property Name="per_ID" Type="Edm.Guid"/>
                 <Property Name="impact" Type="Edm.Int32"/>
                 <Property Name="criticality" Type="Edm.Int32"/>
                 <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
@@ -75,26 +66,6 @@
                 <NavigationProperty Name="DraftAdministrativeData" Type="RiskService.DraftAdministrativeData" ContainsTarget="true"/>
                 <NavigationProperty Name="SiblingEntity" Type="RiskService.Mitigations"/>
             </EntityType>
-            <EntityType Name="Persons">
-                <Key>
-                    <PropertyRef Name="ID"/>
-                    <PropertyRef Name="IsActiveEntity"/>
-                </Key>
-                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
-                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
-                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
-                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
-                <Property Name="name" Type="Edm.String"/>
-                <Property Name="lastname" Type="Edm.String"/>
-                <Property Name="male" Type="Edm.String"/>
-                <NavigationProperty Name="risks" Type="Collection(RiskService.Risks)" Partner="per"/>
-                <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
-                <Property Name="HasActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
-                <Property Name="HasDraftEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="false"/>
-                <NavigationProperty Name="DraftAdministrativeData" Type="RiskService.DraftAdministrativeData" ContainsTarget="true"/>
-                <NavigationProperty Name="SiblingEntity" Type="RiskService.Persons"/>
-            </EntityType>
             <EntityType Name="DraftAdministrativeData">
                 <Key>
                     <PropertyRef Name="DraftUUID"/>
@@ -118,11 +89,6 @@
                 <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
                 <ReturnType Type="RiskService.Mitigations"/>
             </Action>
-            <Action Name="draftPrepare" IsBound="true" EntitySetPath="in">
-                <Parameter Name="in" Type="RiskService.Persons"/>
-                <Parameter Name="SideEffectsQualifier" Type="Edm.String"/>
-                <ReturnType Type="RiskService.Persons"/>
-            </Action>
             <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
                 <Parameter Name="in" Type="RiskService.Risks"/>
                 <ReturnType Type="RiskService.Risks"/>
@@ -130,10 +96,6 @@
             <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
                 <Parameter Name="in" Type="RiskService.Mitigations"/>
                 <ReturnType Type="RiskService.Mitigations"/>
-            </Action>
-            <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
-                <Parameter Name="in" Type="RiskService.Persons"/>
-                <ReturnType Type="RiskService.Persons"/>
             </Action>
             <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
                 <Parameter Name="in" Type="RiskService.Risks"/>
@@ -144,11 +106,6 @@
                 <Parameter Name="in" Type="RiskService.Mitigations"/>
                 <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
                 <ReturnType Type="RiskService.Mitigations"/>
-            </Action>
-            <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
-                <Parameter Name="in" Type="RiskService.Persons"/>
-                <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
-                <ReturnType Type="RiskService.Persons"/>
             </Action>
             <Annotations Target="RiskService.EntityContainer/Risks">
                 <Annotation Term="Common.DraftRoot">
@@ -246,84 +203,36 @@
                                                             <Annotations Target="RiskService.Mitigations/DraftAdministrativeData">
                                                                 <Annotation Term="UI.Hidden" Bool="true"/>
                                                             </Annotations>
-                                                            <Annotations Target="RiskService.EntityContainer/Persons">
-                                                                <Annotation Term="Common.DraftRoot">
-                                                                    <Record Type="Common.DraftRootType">
-                                                                        <PropertyValue Property="ActivationAction" String="RiskService.draftActivate"/>
-                                                                        <PropertyValue Property="EditAction" String="RiskService.draftEdit"/>
-                                                                        <PropertyValue Property="PreparationAction" String="RiskService.draftPrepare"/>
-                                                                    </Record>
-                                                                </Annotation>
-                                                            </Annotations>
-                                                            <Annotations Target="RiskService.Persons/createdAt">
-                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                                                                <Annotation Term="Core.Immutable" Bool="true"/>
-                                                                <Annotation Term="Core.Computed" Bool="true"/>
-                                                                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                            <Annotations Target="RiskService.DraftAdministrativeData">
+                                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftAdministrativeData}"/>
                                                                 </Annotations>
-                                                                <Annotations Target="RiskService.Persons/createdBy">
-                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                                                                    <Annotation Term="Core.Immutable" Bool="true"/>
-                                                                    <Annotation Term="Core.Computed" Bool="true"/>
-                                                                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
-                                                                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                <Annotations Target="RiskService.DraftAdministrativeData/DraftUUID">
+                                                                    <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                    <Annotation Term="Common.Label" String="{i18n>Draft_DraftUUID}"/>
+                                                                    </Annotations>
+                                                                    <Annotations Target="RiskService.DraftAdministrativeData/CreationDateTime">
+                                                                        <Annotation Term="Common.Label" String="{i18n>Draft_CreationDateTime}"/>
                                                                         </Annotations>
-                                                                        <Annotations Target="RiskService.Persons/modifiedAt">
-                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                                                                            <Annotation Term="Core.Computed" Bool="true"/>
-                                                                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                        <Annotations Target="RiskService.DraftAdministrativeData/CreatedByUser">
+                                                                            <Annotation Term="Common.Label" String="{i18n>Draft_CreatedByUser}"/>
                                                                             </Annotations>
-                                                                            <Annotations Target="RiskService.Persons/modifiedBy">
-                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
-                                                                                <Annotation Term="Core.Computed" Bool="true"/>
-                                                                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
-                                                                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                            <Annotations Target="RiskService.DraftAdministrativeData/DraftIsCreatedByMe">
+                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsCreatedByMe}"/>
+                                                                                </Annotations>
+                                                                                <Annotations Target="RiskService.DraftAdministrativeData/LastChangeDateTime">
+                                                                                    <Annotation Term="Common.Label" String="{i18n>Draft_LastChangeDateTime}"/>
                                                                                     </Annotations>
-                                                                                    <Annotations Target="RiskService.Persons/ID">
-                                                                                        <Annotation Term="Core.Computed" Bool="true"/>
-                                                                                    </Annotations>
-                                                                                    <Annotations Target="RiskService.Persons/IsActiveEntity">
-                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
-                                                                                    </Annotations>
-                                                                                    <Annotations Target="RiskService.Persons/HasActiveEntity">
-                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
-                                                                                    </Annotations>
-                                                                                    <Annotations Target="RiskService.Persons/HasDraftEntity">
-                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
-                                                                                    </Annotations>
-                                                                                    <Annotations Target="RiskService.Persons/DraftAdministrativeData">
-                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
-                                                                                    </Annotations>
-                                                                                    <Annotations Target="RiskService.DraftAdministrativeData">
-                                                                                        <Annotation Term="Common.Label" String="{i18n>Draft_DraftAdministrativeData}"/>
+                                                                                    <Annotations Target="RiskService.DraftAdministrativeData/LastChangedByUser">
+                                                                                        <Annotation Term="Common.Label" String="{i18n>Draft_LastChangedByUser}"/>
                                                                                         </Annotations>
-                                                                                        <Annotations Target="RiskService.DraftAdministrativeData/DraftUUID">
-                                                                                            <Annotation Term="UI.Hidden" Bool="true"/>
-                                                                                            <Annotation Term="Common.Label" String="{i18n>Draft_DraftUUID}"/>
+                                                                                        <Annotations Target="RiskService.DraftAdministrativeData/InProcessByUser">
+                                                                                            <Annotation Term="Common.Label" String="{i18n>Draft_InProcessByUser}"/>
                                                                                             </Annotations>
-                                                                                            <Annotations Target="RiskService.DraftAdministrativeData/CreationDateTime">
-                                                                                                <Annotation Term="Common.Label" String="{i18n>Draft_CreationDateTime}"/>
+                                                                                            <Annotations Target="RiskService.DraftAdministrativeData/DraftIsProcessedByMe">
+                                                                                                <Annotation Term="UI.Hidden" Bool="true"/>
+                                                                                                <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsProcessedByMe}"/>
                                                                                                 </Annotations>
-                                                                                                <Annotations Target="RiskService.DraftAdministrativeData/CreatedByUser">
-                                                                                                    <Annotation Term="Common.Label" String="{i18n>Draft_CreatedByUser}"/>
-                                                                                                    </Annotations>
-                                                                                                    <Annotations Target="RiskService.DraftAdministrativeData/DraftIsCreatedByMe">
-                                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
-                                                                                                        <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsCreatedByMe}"/>
-                                                                                                        </Annotations>
-                                                                                                        <Annotations Target="RiskService.DraftAdministrativeData/LastChangeDateTime">
-                                                                                                            <Annotation Term="Common.Label" String="{i18n>Draft_LastChangeDateTime}"/>
-                                                                                                            </Annotations>
-                                                                                                            <Annotations Target="RiskService.DraftAdministrativeData/LastChangedByUser">
-                                                                                                                <Annotation Term="Common.Label" String="{i18n>Draft_LastChangedByUser}"/>
-                                                                                                                </Annotations>
-                                                                                                                <Annotations Target="RiskService.DraftAdministrativeData/InProcessByUser">
-                                                                                                                    <Annotation Term="Common.Label" String="{i18n>Draft_InProcessByUser}"/>
-                                                                                                                    </Annotations>
-                                                                                                                    <Annotations Target="RiskService.DraftAdministrativeData/DraftIsProcessedByMe">
-                                                                                                                        <Annotation Term="UI.Hidden" Bool="true"/>
-                                                                                                                        <Annotation Term="Common.Label" String="{i18n>Draft_DraftIsProcessedByMe}"/>
-                                                                                                                        </Annotations>
-                                                                                                                    </Schema>
-                                                                                                                </edmx:DataServices>
-                                                                                                            </edmx:Edmx>
+                                                                                            </Schema>
+                                                                                        </edmx:DataServices>
+                                                                                    </edmx:Edmx>

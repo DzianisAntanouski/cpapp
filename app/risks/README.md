@@ -1,9 +1,9 @@
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Fri Jul 08 2022 13:53:58 GMT+0300 (Moscow Standard Time)|
+|**Generation Date and Time**<br>Mon Jun 27 2022 13:33:35 GMT+0300 (Moscow Standard Time)|
 |**App Generator**<br>@sap/generator-fiori-elements|
-|**App Generator Version**<br>1.6.4|
+|**App Generator Version**<br>1.6.1|
 |**Generation Platform**<br>Visual Studio Code|
 |**Floorplan Used**<br>List Report Object Page V4|
 |**Service Type**<br>Local Cap|
@@ -19,7 +19,7 @@
 
 ## risks
 
-Risks
+A Fiori application.
 
 ### Starting the generated app
 

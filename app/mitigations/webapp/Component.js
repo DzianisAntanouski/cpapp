@@ -6,7 +6,7 @@ sap.ui.define([
 ], function (UIComponent, Device, models, ErrorHandler) {
     "use strict";
 
-    return UIComponent.extend("ns.mitigations.Component", {
+    return UIComponent.extend("ns.migrations.Component", {
 
         metadata : {
             manifest: "json"

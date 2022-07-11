@@ -6,7 +6,7 @@ sap.ui.define([
 ], function (BaseController, JSONModel, History, formatter) {
     "use strict";
 
-    return BaseController.extend("ns.mitigations.controller.Object", {
+    return BaseController.extend("ns.migrations.controller.Object", {
 
         formatter: formatter,
 

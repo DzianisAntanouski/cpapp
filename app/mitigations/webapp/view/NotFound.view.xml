@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="ns.mitigations.controller.NotFound"
+    controllerName="ns.migrations.controller.NotFound"
     xmlns="sap.m"
     xmlns:mvc="sap.ui.core.mvc">
 

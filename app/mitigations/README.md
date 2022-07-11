@@ -1,15 +1,15 @@
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Fri Jul 08 2022 15:42:08 GMT+0300 (Moscow Standard Time)|
+|**Generation Date and Time**<br>Mon Jun 27 2022 13:48:52 GMT+0300 (Moscow Standard Time)|
 |**App Generator**<br>@sap/generator-fiori-freestyle|
-|**App Generator Version**<br>1.6.4|
+|**App Generator Version**<br>1.6.1|
 |**Generation Platform**<br>Visual Studio Code|
 |**Floorplan Used**<br>3worklistodatav4|
 |**Service Type**<br>Local Cap|
 |**Service URL**<br>http://localhost:4004/service/risk/
-|**Module Name**<br>mitigations|
-|**Application Title**<br>Mitigations|
+|**Module Name**<br>migrations|
+|**Application Title**<br>Migrations|
 |**Namespace**<br>ns|
 |**UI5 Theme**<br>sap_fiori_3|
 |**UI5 Version**<br>1.102.1|
@@ -19,15 +19,15 @@
 |**Object collection key**<br>ID|
 |**Object ID**<br>ID|
 
-## mitigations
+## migrations
 
-Mitigations
+A Fiori application.
 
 ### Starting the generated app
 
 -   This app has been generated using the SAP Fiori tools - App Generator, as part of the SAP Fiori tools suite.  In order to launch the generated app, simply start your CAP project and navigate to the following location in your browser:
 
-http://localhost:4004/mitigations/webapp/index.html
+http://localhost:4004/migrations/webapp/index.html
 
 - It is also possible to run the application using mock data that reflects the OData Service URL supplied during application generation.  In order to run the application with Mock Data, run the following from the generated app root folder:
 
